@@ -1,0 +1,145 @@
+if not listexists 'trainparry'
+  createlist 'trainparry'
+  pushlist 'trainparry' 'no'
+endif
+if not listexists 'trainfencing'
+  createlist 'trainfencing'
+  pushlist 'trainfencing' 'no'
+endif
+if not timerexists 'bands'
+  createtimer 'bands'
+  settimer 'bands' 11001
+endif
+if not timerexists 'pot_heal'
+  createtimer 'pot_heal'
+  settimer 'pot_heal' 10001
+endif
+if not timerexists 'pot_cure'
+  createtimer 'pot_cure'
+  settimer 'pot_cure' 5001
+endif
+if not timerexists 'pot_refresh'
+  createtimer 'pot_refresh'
+  settimer 'pot_refresh' 5001
+endif
+if not timerexists 'running'
+  createtimer 'running'
+  settimer 'running' 30001
+endif
+if not timerexists 'checks'
+  createtimer 'checks'
+  settimer 'checks' 30001
+endif
+if not listexists 'fencingweapons'
+  createlist 'fencingweapons'
+  pushlist 'fencingweapons' 0x1405 //war fork
+  pushlist 'fencingweapons' 0x1401 //kryss
+  pushlist 'fencingweapons' 0xf62 //spear
+  pushlist 'fencingweapons' 0xe87 //pitch fork
+endif
+if not listexists 'shields'
+  createlist 'shields'
+  pushlist 'shields' 0x1b7a //wooden shield
+  pushlist 'shields' 0x1b77 //heater shield
+  pushlist 'shields' 0x1b73 //buckler
+endif
+if not dead
+  if @injournal 'The world is saving, please wait.' 'system'
+    @clearjournal
+    pause 5500
+  endif
+  if timer 'running' > 30000
+    sysmsg 'Running Keep me Alive Premium (KAP)' 60
+    settimer 'running' 0
+  endif
+  if hits < maxhits and timer 'bands' > 11000
+    bandageself
+    settimer 'bands' 0
+  endif
+  if poisoned 'self' and timer 'bands' > 11000
+    bandageself
+    settimer 'bands' 0
+  endif
+  if paralyzed 'self'
+    if @findtype 0xe79 38 'backpack'
+      useobject 'found'
+    endif
+  endif
+  if @inlist 'trainfencing' 'yes'
+    if not @findobject 'righthand'
+      for 0 in 'fencingweapons'
+        if @findtype fencingweapons[] 'any' 'backpack'
+          pause 600
+          equipitem 'found' 1
+        endif
+      endfor
+    endif
+  endif
+  if @inlist 'trainparry' 'yes'
+    if not @findobject 'lefthand'
+      for 0 in 'shields'
+        if @findtype shields[] 'any' 'backpack'
+          pause 600
+          equipitem 'found' 2
+        endif
+      endfor
+    endif
+  endif
+  //  if @counttypeground 0xeed 'any' 2 > 0
+  //moveitemtype 0x40e992fc 'backpack' 89 65 0
+  //    movetype! 0xeed 'ground' 'backpack'
+  //    headmsg 'gotcha'
+  //  endif
+  if hits < 55 and timer 'bands' < 10000
+    if timer 'pot_heal' > 10000 and counttype 0xf0c 'any' 'backpack' > 0
+      usetype 0xf0c 'any' 'backpack'     //pot amarela
+      pause 400
+      settimer 'pot_heal' 0
+    endif
+  endif
+  if poisoned 'self' and timer 'bands' < 10000
+    if timer 'pot_heal' > 5000 and counttype 0xf07 'any' 'backpack' > 0
+      usetype 0xf07 'any' 'backpack'     //pot laranja
+      pause 400
+      settimer 'pot_cure' 0
+    endif
+  endif
+  if stam < 50
+    if timer 'pot_refresh' > 5000 and counttype 0xf0b 'any' 'backpack' > 0
+      usetype 0xf0b 'any' 'backpack'     //pot vermelho
+      pause 400
+      settimer 'pot_refresh' 0
+    endif
+  endif
+  //  if counttype 0xe21 'any' 'backpack' < 1
+  //    turn "West"
+  //    walk "West"
+  //    stop
+  //  endif
+endif
+pause 500
+if timer 'checks' > 30000
+  sysmsg 'KAP: Counting resources' 60
+  //check number of bands
+  if @counttype 0xe21 'any' 'backpack' < 30
+    headmsg 'Poucas Bands < 30' 27
+  endif
+  //check number of pots
+  //heal
+  if @counttype 0xf0c 'any' 'backpack' < 5
+    headmsg 'Poucas pot Heal < 5' 19
+  endif
+  //cure
+  if @counttype 0xf07 'any' 'backpack' < 5
+    headmsg 'Poucas pot Cure < 5' 19
+  endif
+  //refresh
+  if @counttype 0xf0b 'any' 'backpack' < 2
+    headmsg 'Poucas pot Refresh < 2' 19
+  endif
+  //check pouch
+  if @counttype 0xe79 'any' 'backpack' < 2
+    headmsg 'Poucas Pouch de Paralize < 2' 19
+  endif
+  settimer 'checks' 0
+endif
