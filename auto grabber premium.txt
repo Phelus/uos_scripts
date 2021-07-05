@@ -1,0 +1,282 @@
+//ignore yourself serial
+//@clearignorelist
+@clearjournal
+@ignoreobject '0xa118e'
+if not @listexists 'itemlist'
+  createlist 'itemlist'
+  pushlist 'itemlist' 0xefc //aspect extract
+  pushlist 'itemlist' 0x4516 //apect destilation
+  pushlist 'itemlist' 0xf91 //aspect core
+  //pushlist 'itemlist' 0x227a //skill scroll
+  //pushlist 'itemlist' 0x1401 //kryss REMOVE THIS SHIT @@@@#$$$$@@#$
+endif
+if not @listexists 'baglist'
+  createlist 'baglist'
+  pushlist 'baglist' 0xe79 //pouch
+  pushlist 'baglist' 0xe75 //backpack
+  pushlist 'baglist' 0xe76 //bag
+endif
+if not @listexists 'targetlist'
+  createlist 'targetlist'
+  pushlist 'targetlist' 0x190 //male
+  pushlist 'targetlist' 0x191 //female
+endif
+if not @listexists 'takess'
+  createlist 'takess'
+  pushlist 'takess' 'no'
+endif
+if not @timerexists 'running'
+  createtimer 'running'
+  settimer 'running' 30001
+endif
+if not @timerexists 'ignorelist'
+  createtimer 'ignorelist'
+  settimer 'ignorelist' 600001
+endif
+if not @timerexists 'stealing'
+  createtimer 'stealing'
+  settimer 'stealing' 10001
+endif
+if not @timerexists 'snooping'
+  createtimer 'snooping'
+  settimer 'snooping' 2001
+endif
+if timer 'running' > 30000
+  sysmsg 'Running Auto Grabber Premium (AGP)' 60
+  settimer 'running' 0
+endif
+if timer 'ignorelist' > 600000
+  @clearignorelist
+  @ignoreobject '0xa118e'
+  settimer 'ignorelist' 0
+endif
+if not hidden 'self' and timer 'stealing' > 11000
+  useskill 'Hiding'
+  settimer 'stealing' 0
+endif
+if hits < maxhits
+  if @findtype 0xf6c 2821 'ground' 1 2
+    @setalias 'moongate' 'found'
+    sysmsg 'AGP: Gate found' 60
+    if innocent 'self'
+      sysmsg 'AGP: Going to Shelter' 60
+      //sysmsg 'OK' 60
+      usetype 0xf6c 2821 'ground' 2
+      //shelter
+      waitforgump 0xe0e675b8 2000
+      clickscreen! 275 425 'single' 'left'
+      //confirm travel
+      waitforgump 0xe0e675b8 2000
+      clickscreen! 215 620 'single' 'left'
+    endif
+  endif
+endif
+if @findobject 'righthand'
+  sysmsg 'AGP: Toggling right hand' 60
+  pause 500
+  togglehands 'right'
+  pause 500
+endif
+if @findobject 'lefthand'
+  sysmsg 'AGP: Toggling right hand' 60
+  pause 500
+  togglehands 'left'
+  pause 500
+endif
+if not @inrange 'stealtarget' 1
+  @unsetalias 'stealtarget'
+  //sysmsg 'AGP: Searching victim' 60
+  for 0 in 'targetlist'
+    if @findtype targetlist[] 'any' 'ground' 1 1
+      @setalias 'stealtarget' 'found'
+      //sysmsg 'AGP: I have found a target' 60
+      if @findlayer 'stealtarget' 21
+        @setalias 'targetbag' 'found'
+        //useobject! 'stealtarget'
+        //sysmsg 'AGP: I have found a bag' 60
+        break
+      endif
+    endif
+  endfor
+endif
+if not @inrange 'stealtarget' 1
+  //sysmsg 'AGP: No target nearby' 60
+  pause 1000
+  replay
+endif
+//@unsetalias 'stealtarget'
+//while not @findobject 'stealtarget' or not @inrange 'stealtarget' 1
+//  for 0 to 'targetlist'
+//    if @findlayer targetlist[] 21
+//      sysmsg 'ABP: Found a target' 60
+//      setalias 'target' 'found'
+//    endif
+//  endfor
+//endwhile
+if @inrange 'stealtarget' 1 and timer 'snooping' > 2000
+  sysmsg 'AGP: Snooping target' 60
+  useobject! 'targetbag'
+  settimer 'snooping' 0
+  pause 300
+  if @inlist 'takess' 'yes'
+    snapshot
+  endif
+  if @injournal 'You failed to peek into the container' 'system'
+    @clearjournal
+    replay
+  endif
+endif
+while @findobject 'stealtarget' and @inrange 'stealtarget' 1
+  //sysmsg 'AGP: Target is close, checking itens' 60
+  for 0 to 'itemlist'
+    while @counttype itemlist[] 'any' 'targetbag' > 0
+      if @findtype itemlist[] 'any' 'targetbag'
+        @setalias 'targetitem' 'found'
+        sysmsg 'AGP: Found something in him!' 60
+        //clickobject itemlist[]
+        if @findalias 'targetitem' and timer 'stealing' > 11000
+          while timer 'snooping' < 3000
+            pause 1000
+          endwhile
+          sysmsg 'AGP: Stealing target' 60
+          useskill 'Stealing'
+          waitfortarget 5000
+          target! 'targetitem'
+          //targettype (graphic) [color] [range or search level]
+          settimer 'stealing' 0
+          pause 300
+          if @injournal 'You successfully steal' 'system'
+            @clearjournal
+            sysmsg 'AGP: Success! Now RUN!' 60
+            playsound 'goddamnit.wav'
+            @ignoreobject 'targetitem'
+            @unsetalias 'targetitem'
+            while timer 'stealing' < 11000
+              //try to gate
+              sysmsg 'AGP: ESCAPING' 60
+              if @findtype 0xf6c 2821 'ground' 1 2
+                @setalias 'moongate' 'found'
+                sysmsg 'AGP: Gate found, going to Shelter' 60
+                if innocent 'self'
+                  //sysmsg 'OK' 60
+                  usetype 0xf6c 2821 'ground' 2
+                  //shelter
+                  waitforgump 0xe0e675b8 2000
+                  clickscreen! 275 425 'single' 'left'
+                  //confirm travel
+                  waitforgump 0xe0e675b8 2000
+                  clickscreen! 215 620 'single' 'left'
+                endif
+              endif
+              //run 'Northeast'
+              pause 1000
+            endwhile
+            useskill 'Hiding'
+            settimer 'stealing' 0
+          endif
+          if @injournal 'You fail in your stealing' 'system'
+            @clearjournal
+            sysmsg 'AGP: FAIL RUN!' 60
+            //@ignoreobject 'targetitem'
+            //@unsetalias 'targetitem'
+            while timer 'stealing' < 11000
+              //try to gate
+              sysmsg 'AGP: ESCAPING' 60
+              pause 1000
+            endwhile
+            useskill 'Hiding'
+            settimer 'stealing' 0
+          endif
+        endif
+        pause 1000
+      endif
+    endwhile
+    sysmsg 'AGP: Nothing in the main bag' 60
+  endfor
+  for 0 to 'baglist'
+    if @findtype baglist[] 0 'targetbag'
+      @setalias 'otherbag' 'found'
+      sysmsg 'AGP: Found more bag' 60
+      while timer 'snooping' < 2000
+        pause 500
+      endwhile
+      useobject! 'otherbag'
+      settimer 'snooping' 0
+      pause 300
+      if @injournal 'You failed to peek into the container' 'system'
+        @clearjournal
+        replay
+      endif
+    endif
+    for 0 to 'itemlist'
+      while @counttype itemlist[] 'any' 'otherbag' > 0
+        if @findtype itemlist[] 'any' 'otherbag'
+          @setalias 'targetitem' 'found'
+          sysmsg 'AGP: Found something in him!' 60
+          //clickobject itemlist[]
+          if @findalias 'targetitem' and timer 'stealing' > 11000
+            while timer 'snooping' < 3000
+              pause 1000
+            endwhile
+            sysmsg 'AGP: Stealing target' 60
+            useskill 'Stealing'
+            waitfortarget 5000
+            target! 'targetitem'
+            //targettype (graphic) [color] [range or search level]
+            settimer 'stealing' 0
+            pause 300
+            if @injournal 'You successfully steal' 'system'
+              @clearjournal
+              sysmsg 'AGP: Success! Now RUN!' 60
+              playsound 'goddamnit.wav'
+              @ignoreobject 'targetitem'
+              @unsetalias 'targetitem'
+              while timer 'stealing' < 11000
+                //try to gate
+                sysmsg 'AGP: ESCAPING' 60
+                if @findtype 0xf6c 2821 'ground' 1 2
+                  @setalias 'moongate' 'found'
+                  sysmsg 'AGP: Gate found, going to Shelter' 60
+                  if innocent 'self'
+                    //sysmsg 'OK' 60
+                    usetype 0xf6c 2821 'ground' 2
+                    //shelter
+                    waitforgump 0xe0e675b8 2000
+                    clickscreen! 275 425 'single' 'left'
+                    //confirm travel
+                    waitforgump 0xe0e675b8 2000
+                    clickscreen! 215 620 'single' 'left'
+                  endif
+                endif
+                //run 'Northeast'
+                pause 1000
+              endwhile
+              useskill 'Hiding'
+              settimer 'stealing' 0
+            endif
+            if @injournal 'You fail in your stealing' 'system'
+              @clearjournal
+              sysmsg 'AGP: FAIL RUN!' 60
+              //@ignoreobject 'targetitem'
+              //@unsetalias 'targetitem'
+              while timer 'stealing' < 11000
+                //try to gate
+                sysmsg 'AGP: ESCAPING' 60
+                pause 1000
+              endwhile
+              useskill 'Hiding'
+              settimer 'stealing' 0
+            endif
+          endif
+          pause 1000
+        endif
+      endwhile
+    endfor
+    @ignoreobject 'otherbag'
+    @unsetalias 'otherbag'
+  endfor
+  sysmsg 'AGP: No more itens' 60
+  @ignoreobject 'stealtarget'
+  @unsetalias 'stealtarget'
+  break
+endwhile
