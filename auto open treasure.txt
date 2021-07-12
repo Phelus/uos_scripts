@@ -1,0 +1,385 @@
+@removelist 'chests'
+@removelist 'looteables'
+if not listexists 'looteables'
+  createlist 'looteables'
+  pushlist 'looteables' 0xeed //money
+  pushlist 'looteables' 0x1876 //iiron trap wire
+  pushlist 'looteables' 0x1879 //copper trap wire
+  pushlist 'looteables' 0x1877 //silver trap wire
+  pushlist 'looteables' 0xf8d //regs SS
+  pushlist 'looteables' 0xf7a //regs Black Pearl
+  pushlist 'looteables' 0xf7b //regs Blood Moss
+  pushlist 'looteables' 0xf86 //regs Mandrake Root
+  pushlist 'looteables' 0xf84 //regs Garlic
+  pushlist 'looteables' 0xf85 //regs Ginseng
+  pushlist 'looteables' 0xf88 //regs Nightshade
+  pushlist 'looteables' 0xf8c //regs Sulphurous Ash
+  pushlist 'looteables' 0xf16 //jewels Amethyst
+  pushlist 'looteables' 0xf15 //jewels Citrine
+  pushlist 'looteables' 0xf19 //jewels Sapphire
+  pushlist 'looteables' 0xf25 //jewels Amber
+  pushlist 'looteables' 0xf21 //jewels Star Sapphire
+  pushlist 'looteables' 0xf10 //jewels Emerald
+  pushlist 'looteables' 0xf26 //jewels Diamond
+  pushlist 'looteables' 0xf2d //jewels Tourmaline
+  pushlist 'looteables' 0xf13 //jewels Ruby
+  pushlist 'looteables' 0x13f1 //armor ringmail legg
+  pushlist 'looteables' 0x13c4 //armor chainmail chest
+  //Shields
+  @pushlist 'looteables' 0x1b72 //BronzeShields
+  @pushlist 'looteables' 0x1b73 //Buckler
+  @pushlist 'looteables' 0x1b7b //MetalShield
+  @pushlist 'looteables' 0x1b74 //Metal Kite Shield
+  @pushlist 'looteables' 0x1b79 //Tear Kite Shield
+  @pushlist 'looteables' 0x1b7a //WoodenShield
+  @pushlist 'looteables' 0x1b76 //HeaterShield
+  @pushlist 'looteables' 0x1bc5 //order shield
+  //Platemail
+  //@pushlist 'looteables' 0x1408 //Close Helmet
+  @pushlist 'looteables' 0x1417 //Platemail Arms
+  @pushlist 'looteables' 0x141a //Platemail Legs
+  @pushlist 'looteables' 0x1412 //Plate Helm
+  @pushlist 'looteables' 0x1413 //Plate Gorget
+  @pushlist 'looteables' 0x1418 //Platemail Gloves
+  @pushlist 'looteables' 0x1416 //Plate Chest
+  //@pushlist 'looteables' 0x140a //Helmet
+  //@pushlist 'looteables' 0x140c //Bascinet
+  //@pushlist 'looteables' 0x140e //Norse Helm
+  //Chainmail
+  //@pushlist 'looteables' 0x13bb //Chainmail Coif
+  //@pushlist 'looteables' 0x13be //Chainmail Leggins
+  //@pushlist 'looteables' 0x13bf //Chainmail Tunic
+  //Ringmail
+  //@pushlist 'looteables' 0x13ee //Ringmail Sleeves
+  //@pushlist 'looteables' 0x13eb //Ringmail Gloves
+  //@pushlist 'looteables' 0x13ec //Ringmail Tunic
+  //@pushlist 'looteables' 0x13f0 //Ringmail Leggins
+  //Studded
+  //@pushlist 'looteables' 0x13da //Studded Leggings
+  //@pushlist 'looteables' 0x13db //Studded Tunic
+  //@pushlist 'looteables' 0x13d5 //Studded Gloves
+  //@pushlist 'looteables' 0x13d6 //Studded Gorget
+  //@pushlist 'looteables' 0x13dc //Studded Sleeves
+  //Leather
+  @pushlist 'looteables' 0x13ce //Leather Gloves
+  @pushlist 'looteables' 0x13c5 //Leather Sleeves
+  @pushlist 'looteables' 0x13d3 //Leather Tunic
+  @pushlist 'looteables' 0x13d2 //Leather Pants
+  @pushlist 'looteables' 0x13c7 //Leather Gorget
+  @pushlist 'looteables' 0x1db9 //Leather Cap
+  //Female Armor
+  //@pushlist 'looteables' 0x1c04 //Female Plate
+  //@pushlist 'looteables' 0x1c0c //Female Studded Bustier
+  //@pushlist 'looteables' 0x1c02 //Female Studded Armor
+  //@pushlist 'looteables' 0x1c00 //Female Leather Shorts
+  //@pushlist 'looteables' 0x1c08 //Female Leather Skirt
+  //@pushlist 'looteables' 0x1c06 //Female Leather Armor
+  //@pushlist 'looteables' 0x1c0a //Female Leather Bustier
+  //Fencing
+  @pushlist 'looteables' 0xf62  //Spear
+  @pushlist 'looteables' 0x1403 //Short Spear
+  @pushlist 'looteables' 0xe87  //Pitchfork
+  @pushlist 'looteables' 0x1405 //Warfork
+  @pushlist 'looteables' 0x1401 //Kryss
+  @pushlist 'looteables' 0xf52  //Dagger
+  //Macing
+  @pushlist 'looteables' 0x13b0 //War axe
+  @pushlist 'looteables' 0xdf0  //Black Staff
+  @pushlist 'looteables' 0x1439 //War Hammer
+  @pushlist 'looteables' 0x1407 //War Mace
+  @pushlist 'looteables' 0xe89  //Quarter Staff
+  @pushlist 'looteables' 0x143d //Hammer Pick
+  @pushlist 'looteables' 0x13b4 //Club
+  @pushlist 'looteables' 0xe81  //Shepherds Crook
+  @pushlist 'looteables' 0x13f8 //Gnarled Staff
+  @pushlist 'looteables' 0xf5c  //Mace
+  @pushlist 'looteables' 0x143b //Maul
+  //Swords
+  @pushlist 'looteables' 0x13b9 //Viking Sword
+  @pushlist 'looteables' 0xf61  //Longsword
+  @pushlist 'looteables' 0x1441 //Cutlass
+  @pushlist 'looteables' 0x13b6 //Scimitar
+  @pushlist 'looteables' 0xec4  //Skinning Knife
+  @pushlist 'looteables' 0x13f6 //Butcher Knife
+  @pushlist 'looteables' 0xf5e  //Broadsword
+  @pushlist 'looteables' 0x13ff //Katana
+  @pushlist 'looteables' 0xec3  //Cleaver
+  //Axes
+  @pushlist 'looteables' 0xf43 //Hatchet
+  @pushlist 'looteables' 0xf45 //Executioner's Axe
+  @pushlist 'looteables' 0xf4d //Bardiche
+  @pushlist 'looteables' 0xf4b  //Double Axe
+  @pushlist 'looteables' 0x143e //Halberd
+  @pushlist 'looteables' 0x13fb //Large Battle Axe
+  @pushlist 'looteables' 0x1443 //Two Handed Axe
+  @pushlist 'looteables' 0xf47  //Battle Axe
+  @pushlist 'looteables' 0xf49  //Axe
+  @pushlist 'looteables' 0xe85  //Pickaxe
+  @pushlist 'looteables' 0xe86  //Pickaxe
+  //Bows
+  @pushlist 'looteables' 0x13fd //HeavyXbow
+  @pushlist 'looteables' 0xf50  //Xbow
+  @pushlist 'looteables' 0x13b2 //bow
+  pushlist 'looteables' 0xf3f //arrow
+  pushlist 'looteables' 0xe21 //bands
+  pushlist 'looteables' 0x1bfb //bolts
+  pushlist 'looteables' 0xf0c //pot heal
+  pushlist 'looteables' 0x1f41 //scrolls
+  pushlist 'looteables' 0xefc //extract shadow aspect
+  pushlist 'looteables' 0xef3 //arcane scroll
+  pushlist 'looteables' 0x7166 //plant chemicals
+  pushlist 'looteables' 0xefa //book
+endif
+if not listexists 'chests'
+  createlist 'chests'
+  pushlist 'chests' 0xe43
+  pushlist 'chests' 0xe41
+  pushlist 'chests' 0x9ab //metal lvl 3 bronze WE
+  pushlist 'chests' 0xe40 //lvl 3 bronze NS
+  pushlist 'chests' 0xe42 //madeira lvl 3 prata NS
+  pushlist 'chests' 0xe7c //metal lvl 5 agapite NS
+endif
+if not listexists 'got_chest' or list 'got_chest' > 0
+  createlist 'got_chest'
+  pushlist 'got_chest' 'no'
+endif
+if not listexists 'chestslevel'
+  createlist 'chestslevel'
+  pushlist 'chestslevel' 'level 1'
+  pushlist 'chestslevel' 'level 2'
+  pushlist 'chestslevel' 'level 3'
+  pushlist 'chestslevel' 'level 4'
+  pushlist 'chestslevel' 'level 5'
+  pushlist 'chestslevel' 'level 6'
+endif
+if not timerexists 'removetrap'
+  createtimer 'removetrap'
+  settimer 'removetrap' 4000
+endif
+if not timerexists 'lockpick'
+  createtimer 'lockpick'
+  settimer 'lockpick' 4000
+endif
+if not timerexists 'bands'
+  createtimer 'bands'
+  settimer 'bands' 10000
+endif
+if not timerexists 'hiding'
+  createtimer 'hiding'
+  settimer 'hiding' 4000
+endif
+while hidden
+  if not @inrange 'chestsnear' 2
+    @unsetalias 'chestsnear'
+    for 0 in 'chests'
+      if @findtype chests[] 'any' 'ground' 1 2
+        @setalias 'chestsnear' 'found'
+        break
+      endif
+    endfor
+  endif
+  if not @inrange 'chestsnear' 2
+    headmsg 'No chests near you!' 2
+    pause 1000
+    stop
+  endif
+  if not @inrange 'chestsnear' 1
+    if @x 'chestsnear' > x 'self' and @y 'chestsnear' > y 'self'
+      walk 'Southeast'
+    elseif @x 'chestsnear' < x 'self' and @y 'chestsnear' > y 'self'
+      walk 'Southwest'
+    elseif @x 'chestsnear' > x 'self' and @y 'chestsnear' < y 'self'
+      walk 'Northeast'
+    elseif @x 'chestsnear' < x 'self' and @y 'chestsnear' < y 'self'
+      walk 'Northwest'
+    elseif @x 'chestsnear' > x 'self' and @y 'chestsnear' == y 'self'
+      walk 'East'
+    elseif @x 'chestsnear' < x 'self' and @y 'chestsnear' == y 'self'
+      walk 'West'
+    elseif @x 'chestsnear' == x 'self' and @y 'chestsnear' > y 'self'
+      walk 'South'
+    elseif @x 'chestsnear' == x 'self' and @y 'chestsnear' < y 'self'
+      walk 'North'
+    endif
+  endif
+  @clearjournal
+  // target! 'chestsnear'
+  clickobject! 'chestsnear'
+  pause 400
+  if @injournal 'level 7' 'system'
+    headmsg 'BAU 7' 2
+    if @findtype 0x7149 2213 'backpack' 1
+      headmsg 'Remover gold' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2213 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    endif
+  elseif @injournal 'level 6' 'system'
+    headmsg 'BAU 6' 2
+    if @findtype 0x7149 2213 'backpack' 1
+      headmsg 'Remover gold' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2213 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    elseif @findtype 0x7149 2418 'backpack' 1
+      headmsg 'Remover bronze' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2418 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    else
+      headmsg 'Consiga ferramentas e tente novamente' 2
+      stop
+    endif
+  elseif @injournal 'level 5' 'system'
+    headmsg 'BAU 5' 2
+    if @findtype 0x7149 2413 'backpack' 1
+      headmsg 'Remover copper' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2413 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    elseif @findtype 0x7149 2406 'backpack' 1
+      headmsg 'Remover shadow' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2406 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    elseif @findtype 0x7149 2418 'backpack' 1
+      headmsg 'Remover bronze' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2418 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    endif
+  else
+    if @findtype 0x7149 2419 'backpack' 1
+      headmsg 'Remover dull' 2
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 2419 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    elseif @findtype 0x7149 0 'backpack' 1
+      @setalias 'trapremovalcolor' 'found'
+      @findtype 0x14fd 0 'backpack' 1
+      @setalias 'lockpickcolor' 'found'
+    endif
+  endif
+  @clearjournal
+  if timer 'removetrap' > 4000
+    //usetype 0x7149 0 'backpack'
+    useobject 'trapremovalcolor'
+    autotargetobject! 'chestsnear'
+    settimer 'removetrap' 0
+    pause 600
+  endif
+  //pause 4000
+  if @injournal 'You attempt to remove traps.' 'system'
+    if timer 'removetrap' > 4000
+      //usetype 0x7149 0 'backpack'
+      useobject 'trapremovalcolor'
+      autotargetobject! 'chestsnear'
+      settimer 'removetrap' 0
+      pause 400
+    endif
+    if not hidden and timer 'hiding' > 10000
+      useskill 'Hiding'
+      pause 400
+    endif
+    @clearjournal
+  endif
+  if hits < maxhits
+    //procura pocao
+    if @findtype 0xf0c 0 'backpack' and timer 'hiding' > 10000
+      @setalias 'Potion' 'found'
+      if @findlayer 'self' 2
+        togglehands 'left'
+        pause 400
+        useobject! 'Potion'
+        useskill! 'Hiding'
+        settimer 'hiding' 0
+        pause 400
+        togglehands 'left'
+      else
+        useobject! 'Potion'
+        useskill! 'Hiding'
+        settimer 'hiding' 0
+        pause 400
+      endif
+    else
+      headmsg 'Sem pot heal!'
+    endif
+    if skill 'Healing' > 50.0 and timer 'hiding' > 10000
+      if @findtype 0xe21 'any' 'backpack'
+        @setalias 'Bands' 'found'
+        useobject! 'Bands'
+        target! 'self'
+        useskill! 'Hiding'
+        settimer 'hiding' 0
+        pause 400
+      else
+        headmsg 'Sem bands!'
+      endif
+    endif
+    //magery healing
+  endif
+  if poisoned 'self'
+    if @findtype 0xf07 0 'backpack'
+      if @findlayer 'self' 2
+        togglehands 'left'
+        pause 400
+        @setalias 'Potion' 'found'
+        useobject! 'Potion'
+        useskill! 'Hiding'
+        pause 400
+        togglehands 'left'
+      else
+        headmsg 'Sem pot cure!'
+      endif
+    endif
+    if skill 'Healing' > 60.0 and timer 'Bands' > 10000
+      if @findtype 0xe21 'any' 'backpack'
+        @setalias 'Bands' 'found'
+        useobject! 'Bands'
+        target! 'self'
+        useskill! 'Hiding'
+        settimer 'bands' 0
+        pause 400
+      else
+        headmsg 'Sem bands!'
+      endif
+    endif
+    //magery cure
+  endif
+  if @injournal 'That appears to be devoid of traps.' 'system'
+    while not @injournal 'You successfully pick the lock' 'system'
+      if timer 'lockpick' > 4000
+        //usetype 0x14fd 0 'backpack'
+        useobject 'lockpickcolor'
+        autotargetobject! 'chestsnear'
+        settimer 'lockpick' 0
+        pause 400
+        @clearjournal
+      endif
+      pause 400
+    endwhile
+  endif
+  if @injournal 'That appears to be unlocked and devoid of traps.' 'system'
+    headmsg 'SUCESSO!'
+    //playsound 'over-here-2.wav'
+    @clearjournal
+    //while @findtype looteables[] 'any' 'chestsnear' 1 2
+    //  movetype 'looteables' 'chestsnear' 'backpack'
+    //  break
+    // endif
+    for 0 to 'looteables'
+      while @findtype 'looteables[]' 'any' 'chestsnear'
+        @clearjournal
+        moveitem found 'backpack'
+        pause 500
+      endwhile
+    endfor
+    pause 500
+    @unsetalias 'chestsnear'
+    @unsetalias 'lockpickcolor'
+    @unsetalias 'trapremovalcolor'
+    stop
+  endif
+endwhile
+useskill 'Hiding'
+pause 500
